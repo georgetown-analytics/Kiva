@@ -1,1 +1,1 @@
-aws_connection_string = "postgresql://username:password@server.com:5432/db"
+aws_connection_string = "postgresql://username:password@server.com:5432/kiva"

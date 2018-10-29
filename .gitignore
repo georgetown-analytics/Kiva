@@ -1,6 +1,0 @@
-*config.py
-.ipynb_checkpoints
-*.pyc
-*.pyo
-*.db
-*.DS_Store

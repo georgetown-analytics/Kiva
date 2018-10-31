@@ -9,11 +9,13 @@ conn = psycopg2.connect("host=localhost" dbname=postgres user=postgres")
 url = "http://s3.kiva.org/snapshots/kiva_ds_csv.zip"
 download = requests.get(url, allow_redirects=True)
 open('kiva_ds_csv.zip', 'wb').write(download.content)
+print("Successfully downloaded Kiva data")
 
 # unzip the file to local directory
 kiva_csv = zipfile.ZipFile('kiva_ds_csv.zip', 'r')
 kiva_csv.extractall()
 kiva_csv.close()
+print("Successfully extracted Kiva data")
 
 # import csv into PostgreSQL db
 cur = conn.cursor()

@@ -54,6 +54,7 @@ class KivaDataLoader:
         ,posted_to_raised_days
         ,case when posted_to_raised_days < 8 then 0 when posted_to_raised_days < 15 then 1
         when posted_to_raised_days < 22 then 2 else 3 end as posted_to_raised_bins
+        ,case when posted_to_raised_days < 8 then 1 else 0 end as raised_in_7_days_bit
         ,disbursed_to_raised_days
         ,partners.status as partner_status
         ,rating as partner_rating
@@ -201,3 +202,62 @@ class KivaDataLoader:
                 self.engine.execute(statement)
             except:
                 print ("statement for create_or_rebuild_tbl_ddates failed")
+
+def create_or_rebuild_table_partners(self,really):
+    if really.upper() == 'Y' and self.connected == True:
+        statement = """DROP TABLE if exists partners;
+        CREATE TABLE partners (
+            id integer PRIMARY KEY,
+            name character varying(98) NOT NULL,
+            status character varying(8) NOT NULL,
+            rating character varying(9) NOT NULL,
+            start_date character varying(20) NOT NULL,
+            delinquency_rate character varying(11) NOT NULL,
+            default_rate character varying(11) NOT NULL,
+            total_amount_raised integer NOT NULL,
+            loans_posted integer NOT NULL,
+            delinquency_rate_note character varying(614),
+            default_rate_note character varying(630),
+            portfolio_yield_note character varying(59),
+            charges_fees_and_interest character varying(5),
+            average_loan_size_percent_per_capita_income character varying(6) NOT NULL,
+            loans_at_risk_rate numeric(12,9) NOT NULL,
+            currency_exchange_loss_rate character varying(630) NOT NULL,
+            url character varying(95),
+            portfolio_yield numeric(4,1),
+            profitability numeric(6,2)
+        );
+        COMMIT;
+            """
+
+        print (statement)
+            #and posted_time_actual >= make_date(2016, 6 ,1) and posted_time_actual <= make_date(2017, 5 ,31)
+        try:
+            self.engine.execute(statement)
+        except:
+            print ("statement for create_or_rebuild_tbl_ddates failed")
+
+        import requests
+        import pandas as pd
+        import json
+        from pandas.io.json import json_normalize
+
+
+        r = requests.get('https://api.kivaws.org/v1/partners.json&page=1')
+        j = r.json()
+
+        df = json_normalize(j['partners'])
+
+        i = 2
+        while i < 265:
+            r = requests.get('https://api.kivaws.org/v1/partners.json&page=%d' % i)
+            j = r.json()
+            if len(j['partners']) == 0 :
+                break
+            df2 = json_normalize(j['partners'])
+            frames = [df,df2]
+            df = pd.concat(frames)
+            i += 1
+
+        partners = df
+        partners.to_sql('partners', con=self.engine, if_exists='append')

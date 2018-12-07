@@ -3,7 +3,7 @@ from sklearn.externals import joblib
 import numpy as np
 import json
 
-# load pickle here below
+# load pickle below
 lr = joblib.load('kiva-predictor.pkl')
 
 app = Flask(__name__)
@@ -26,18 +26,23 @@ def input_to_one_hot(data):
     # initialize the target vector with zero values
     enc_input = np.zeros(40)
     # set the numerical input as they are
-    enc_input[0] = data['age']
-    enc_input[1] = data['sex']
-    enc_input[2] = data['urban']
-    enc_input[3] = data['ssnyn']
-    enc_input[4] = data['vt']
-    enc_input[5] = data['histatus']
+    enc_input[0] = data['English language']
+    enc_input[1] = data['Description length']
+    enc_input[2] = data['Loan amount']
+    enc_input[3] = data['Loan image provided']
+    enc_input[4] = data['Loan video provided']
+    enc_input[5] = data['Loan use length']
+    enc_input[6] = data['Currency exchange coverage rate']
+    enc_input[7] = data['USD']
+    enc_input[8] = data['Sector']
+    enc_input[9] = data['Distribution model field partner']
+    enc_input[10] = data['Repayment interval']
 
     cols = ['age', 'sex', 'urban', 'ssnyn', 'vt', 'histatus', 'ms_1', 'ms_2', 'ms_3', 'ms_4', 'ms_5', 'educ_1', 'educ_2', 'educ_5', 'educ_8', 'educ_9', 'educ_12', 'educ_13', 'pob_0', 'pob_101', 'pob_102', 'pob_103', 'pob_104', 'pob_105', 'pob_106', 'pob_107', 'pob_108','pob_110', 'pob_900', 'esr_1', 'esr_2', 'esr_3', 'esr_4', 'esr_5', 'hitype_0', 'hitype_1', 'hitype_2', 'hitype_3', 'hitype_4', 'hitype_5']
     ##################### MS #########################
     # get the array of ms categories
     ms = ['1', '2', '3', '4', '5']
-    # redefine the the user inout to match the column name
+    # redefine the the user input to match the column name
     redefinded_user_input = 'ms_'+data['ms']
     # search for the index in columns name list
     ms_column_index = cols.index(redefinded_user_input)

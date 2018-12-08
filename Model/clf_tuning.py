@@ -38,27 +38,22 @@ seed=1
 model = [
             'lr',
             'RFC',
-            'ADB',
-            'GBC',
-            'MLPC'
+            'GBC'
         ]
+
 clf = [
     LogisticRegression(random_state=seed, max_iter=1000),
     RandomForestClassifier(random_state=seed,n_jobs=-1),
-    AdaBoostClassifier(random_state=seed),
     GradientBoostingClassifier(random_state=seed),
-    MLPClassifier(random_state=seed)
       ]
 
 params = {
 
-            model[0]: {'C':np.logspace(-4, 4, 5), 'class_weight':[None, 'balanced'], 'solver':['liblinear','saga'], 'penalty': ['l1','l2'] },
+            model[0]: {'C':np.logspace(-4, 4, 5), 'solver':['liblinear','saga'], 'penalty': ['l1','l2'] },
             model[1]:{'n_estimators':[300], 'criterion':['entropy'],'min_samples_split':[2],
                       'min_samples_leaf': [2]},
             model[2]:{'learning_rate':[0.01,0.005], 'n_estimators':[10,200]},
-            model[3]:{'learning_rate':[0.01,0.005],'n_estimators':[10,200],
-                       'min_samples_split':[2],'min_samples_leaf': [2]},
-            model[4]: {'alpha':[0.001,1], 'solver':['lbfgs','adam','sgd']}
+
          }
 for name, estimator in zip(model,clf):
     print(name)
@@ -72,8 +67,3 @@ for name, estimator in zip(model,clf):
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))
-
-# Persist the chosen model by pickling the model using joblib
-# filename = "kiva_predictor.sav"
-# model = "lr"
-# joblib.dump(model, filename) # replace 'model' with the selected model

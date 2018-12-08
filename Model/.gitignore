@@ -7,3 +7,4 @@ dbconfig.py
 .DS_Store
 config/dbconfig.py
 Model/dbconfig.py
+Kiva/Model/dbconfig.py

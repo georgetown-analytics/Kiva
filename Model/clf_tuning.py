@@ -22,6 +22,7 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.metrics import f1_score, log_loss, roc_curve, precision_recall_curve, auc, make_scorer, recall_score, accuracy_score, precision_score, confusion_matrix
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import SGDClassifier
+from sklearn.externals import joblib
 
 startTime = time.time()
 
@@ -71,3 +72,8 @@ for name, estimator in zip(model,clf):
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))
+
+# Persist the chosen model by pickling the model using joblib
+# filename = "kiva_predictor.sav"
+# model = "lr"
+# joblib.dump(model, filename) # replace 'model' with the selected model

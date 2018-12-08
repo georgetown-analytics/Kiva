@@ -6,3 +6,4 @@ dbconfig.py
 .ipynb*
 .DS_Store
 config/dbconfig.py
+Model/dbconfig.py

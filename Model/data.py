@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from Ingestion.kivadataloader import KivaDataLoader
+from kivadataloader import KivaDataLoader
 
 m=KivaDataLoader()
 cleaneduploans=m.get_clean_dataframe()

@@ -22,14 +22,15 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.metrics import classification_report, f1_score, log_loss, roc_curve, precision_recall_curve, auc, make_scorer, recall_score, accuracy_score, precision_score, confusion_matrix
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import SGDClassifier
+from sklearn.externals import joblib
 import pickle
 
 startTime = time.time()
 
 df=pd.read_csv('data.csv')
 y=df['fol'].sample(frac=0.1, random_state=1)
-X=df.sample(frac=0.1, random_state=1).drop(['fol'],axis=1)
-
+X=df.sample(frac=0.1, random_state=1).drop('fol',axis=1)
+print('Instances: ', len(X), ' Number of features: ', len(X.columns))
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state=1)
 
@@ -74,8 +75,10 @@ for clf in classifiers:
 
 print("="*30)
 
-filename = 'kiva-predictor.pkl'
-pickle.dump(clf, open(filename, 'wb'))
+model=LogisticRegression().fit(X_train, y_train)
+
+#Pickle
+pickle.dump(model, open('kiva_predictor.pkl', 'wb'))
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))

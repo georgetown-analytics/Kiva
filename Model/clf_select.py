@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import time
@@ -23,6 +22,7 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.metrics import classification_report, f1_score, log_loss, roc_curve, precision_recall_curve, auc, make_scorer, recall_score, accuracy_score, precision_score, confusion_matrix
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import SGDClassifier
+import pickle
 
 startTime = time.time()
 
@@ -34,20 +34,20 @@ X=df.sample(frac=0.1, random_state=1).drop(['fol'],axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state=1)
 
 classifiers = [
-    LogisticRegression(),
-    KNeighborsClassifier(3),
-    DecisionTreeClassifier(),
-    RandomForestClassifier(n_estimators=100),
-    ExtraTreesClassifier(),
-    AdaBoostClassifier(),
-    GradientBoostingClassifier(),
-    GaussianNB(),
-    MultinomialNB(),
-    LinearDiscriminantAnalysis(n_components=2),
-    QuadraticDiscriminantAnalysis(),
-    MLPClassifier(alpha=1),
-    LinearSVC(),
-    SGDClassifier()]
+    LogisticRegression()]#,
+    #KNeighborsClassifier(3),
+    #DecisionTreeClassifier(),
+    #RandomForestClassifier(n_estimators=100),
+    #ExtraTreesClassifier(),
+    #AdaBoostClassifier(),
+    #GradientBoostingClassifier(),
+    #GaussianNB(),
+    #MultinomialNB(),
+    #LinearDiscriminantAnalysis(n_components=2),
+    #QuadraticDiscriminantAnalysis(),
+    #MLPClassifier(alpha=1),
+    #LinearSVC(),
+    #SGDClassifier()]
 
 log_cols=["Classifier", "Accuracy", "Log Loss"]
 log = pd.DataFrame(columns=log_cols)
@@ -73,6 +73,9 @@ for clf in classifiers:
     log = log.append(log_entry)
 
 print("="*30)
+
+filename = 'kiva-predictor.pkl'
+pickle.dump(clf, open(filename, 'wb'))
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))

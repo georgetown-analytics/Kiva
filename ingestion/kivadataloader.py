@@ -4,7 +4,7 @@ class KivaDataLoader:
         self.connected = False
         from sqlalchemy import create_engine
         from sqlalchemy import exc
-        from config import dbconfig
+        import dbconfig
         self.engine = create_engine(dbconfig.aws_connection_string)
         try:
             self.engine.connect()
@@ -22,56 +22,19 @@ class KivaDataLoader:
         import pandas as pd
         import numpy as np
         statement = """SELECT
-        loans.loan_id
-        ,loan_name
-        ,CASE WHEN original_language = 'English'  THEN  1 ELSE 0 END AS language_english
+        CASE WHEN original_language = 'English'  THEN  1 ELSE 0 END AS language_english
         ,char_length(description) as description_length
-        ,funded_amount
         ,loan_amount
-        ,loans.status as status_loans
-        ,CASE WHEN image_id IS NULL THEN  0 ELSE 1 END as loan_image_provided
-        ,CASE WHEN video_id IS NULL THEN  0 ELSE 1 END  as loan_video_provided
-        ,activity_name
-        ,sector_name
         ,char_length(loan_use) loan_use_length
-        ,country_code
-        ,country_name
-        ,currency_policy
-        ,currency_exchange_coverage_rate
-        ,currency
         ,CASE WHEN currency = 'USD' THEN 1 ELSE 0 END as currency_usd
-        ,partner_id
-        ,planned_expiration_time
-        ,num_journal_entries
-        ,num_bulk_entries
         ,CASE WHEN char_length(tags) > 0 THEN  1 ELSE 0 END tags_exist
         ,borrower_genders
-        ,CASE WHEN borrower_pictured = 'FALSE' THEN 0 ELSE 1 END as atleast1_borrower_pictured
         ,repayment_interval
         ,distribution_model
-        ,posted_time_actual
-        ,disburse_to_posted_days
+        ,country_name
+        ,sector_name
         ,posted_to_raised_days
-        ,case when posted_to_raised_days < 8 then 0 when posted_to_raised_days < 15 then 1
-        when posted_to_raised_days < 22 then 2 else 3 end as posted_to_raised_bins
-        ,case when posted_to_raised_days < 8 then 1 else 0 end as raised_in_7_days_bit
-        ,disbursed_to_raised_days
-        ,partners.status as partner_status
-        ,rating as partner_rating
-        ,start_date as parner_start_date
-        ,delinquency_rate as partner_delinquency_rate
-        ,default_rate as partner_default_rate
-        ,total_amount_raised as partner_total_amount_raised
-        ,loans_posted as partner_loans_posted
-        ,case when charges_fees_and_interest = 'TRUE' THEN 1 ELSE 0 END as partner_charges_fees_and_interest
-        ,average_loan_size_percent_per_capita_income as partner_avg_loan_size_pct_per_capita_income
-        ,loans_at_risk_rate as partner_loans_at_risk_rate
-        ,currency_exchange_loss_rate as partner_loans_at_risk_rate
-        ,CASE WHEN char_length(url) > 0 THEN  1 ELSE 0 END as partner_url_length
-        ,portfolio_yield as partner_portfolio_yield
-        ,profitability  as partner_profitability
-         FROM loans
-        inner join partners on partners.id = loans.partner_id
+             FROM loans
         inner join loan_dates on loans.loan_id = loan_dates.loan_id
         where loans.status = 'funded'
         and posted_to_raised_days >= 0 and posted_to_raised_days <= 30
@@ -90,12 +53,18 @@ class KivaDataLoader:
             cleanloans['num_borrowers_female_pct'] = (cleanloans['num_borrowers_female']*1.00)/cleanloans['num_borrowers']
             cleanloans = pd.concat([cleanloans,pd.get_dummies(cleanloans['sector_name'], prefix='sector_name')],axis=1)
             cleanloans.drop(['sector_name'],axis=1, inplace=True)
-
             cleanloans = pd.concat([cleanloans,pd.get_dummies(cleanloans['distribution_model'], prefix='distribution_model')],axis=1)
             cleanloans.drop(['distribution_model'],axis=1, inplace=True)
-
+            cleanloans['fol']=np.where(cleanloans['posted_to_raised_days']<=5,0,1)
             cleanloans = pd.concat([cleanloans,pd.get_dummies(cleanloans['repayment_interval'], prefix='repayment_interval')],axis=1)
             cleanloans.drop(['repayment_interval'],axis=1, inplace=True)
+            cleanloans['description_length'].fillna(0,inplace=True)
+            cleanloans['loan_use_length'].fillna(0,inplace=True)
+            cleanloans=cleanloans.drop(['posted_to_raised_days',
+'num_borrowers', 'num_borrowers_male', 'num_borrowers_female',
+'sector_name_Food','repayment_interval_monthly'], axis=1)
+            cleanloans=cleanloans.select_dtypes(exclude=['object','datetime64[ns, UTC]'])
+
         except:
             print ("***** statement for get_clean_dataframe failed *****")
             return

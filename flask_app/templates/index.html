@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Posted to Funded Time Predictor</title>
+	<title>Kiva - Fast Money Helper</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
 
@@ -22,134 +23,148 @@
 		<div class="wrap-contact100">
 			<form id="form_pred" class="contact100-form validate-form" method="post" action="/api">
 				<span class="contact100-form-title">
-					Posted to Funded Time Prediction
+					Kiva - Fast Money Helper
 				</span>
-
-				<div class="wrap-input100 validate-input" data-validate="Age is required">
-					<span class="label-input100">Age</span>
-					<input class="input100" type="text" id="age" name="age" placeholder="Enter your age">
-					<span class="focus-input100"></span>
-				</div>
 				<div class="wrap-input100 validate-input" data-validate="Gender is required">
-					<span class="label-input100">Gender</span>
+					<span class="label-input100">How many female borrowers are in your group?</span>
 					<div>
-						<select class="selection-2" id="sex" name="sex">
-							<option value="1">Male</option>
-							<option value="0">Female</option>
+						<select class="selection-2" id="females" name="females">
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+							<option value="32">32</option>
+							<option value="33">33</option>
+							<option value="34">34</option>
+							<option value="35">35</option>
+							<option value="36">36</option>
+							<option value="37">37</option>
+							<option value="38">38</option>
+							<option value="39">39</option>
+							<option value="40">40</option>
 						</select>
 					</div>
+					<div class="wrap-input100 validate-input" data-validate="Gender is required">
+						<span class="label-input100">How many male borrowers are in your group?</span>
+						<div>
+							<select class="selection-2" id="males" name="males">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+							</select>
+						</div>
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 input100-select">
-					<span class="label-input100">Marital Status</span>
+					<span class="label-input100">Will you be using USD as your currency?</span>
 					<div>
-						<select class="selection-2" id="ms" name="ms">
-							<option value="1">Married</option>
-							<option value="2">Widowed</option>
-                                                        <option value="3">Divorced</option>
-							<option value="4">Separated</option>
-                                                        <option value="5">Never Married</option>
+						<select class="selection-2" id="usd" name="usd">
+							<option value="1">Yes</option>
+							<option value="2">No</option>
 						</select>
 					</div>
+				</div>
+					<span class="focus-input100"></span>
+					<div class="wrap-input100 input100-select">
+						<span class="label-input100">Will you be using english for your post?</span>
+						<div>
+							<select class="selection-2" id="englishyn" name="englishyn">
+								<option value="1">Yes</option>
+								<option value="2">No</option>
+							</select>
+						</div>
+						<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Description is required">
+					<span class="label-input100">Description (english)</span>
+					<input class="input100" type="text" id="age" name="description" placeholder="Enter your description in english">
 					<span class="focus-input100"></span>
 				</div>
-				<div class="wrap-input100 validate-input" data-validate="Education is required">
-					<span class="label-input100">Education</span>
+		        <div class="wrap-input100 input100-select">
+					<span class="label-input100">What Sector will you choose? (Default is retail)</span>
 					<div>
-						<select class="selection-2" id="educ" name="educ">
-							<option value="1">None</option>
-							<option value="2">Elementary School</option>
-                                                        <option value="5">Some High School</option>
-                                                        <option value="8">High School</option>
-                                                        <option value="9">Some College</option>
-                                                        <option value="12">Undergraduate Degree</option>
-							<option value="13">Graduate Degree</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-				<div class="wrap-input100 input100-select">
-					<span class="label-input100">Place of Birth</span>
-					<div>
-						<select class="selection-2" id="pob" name="pob">
-							<option value="0">Unknown</option>
-							<option value="101">African Continent</option>
-                                                        <option value="102">Asian Continent</option>
-							<option value="103">Eastern Europe</option>
-                                                        <option value="104">Western Europe</option>
-							<option value="105">North America (Not US or Mexico)</option>
-                                                        <option value="106">South America</option>
-							<option value="107">Central America</option>
-                                                        <option value="108">Mexico</option>
-							<option value="110">Elsewhere (Not US)</option>
-							<option value="900">US</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">Employment Status</span>
-					<div>
-						<select class="selection-2" id="esr" name="esr">
-							<option value="1">Employed</option>
-							<option value="2">Absent from Work</option>
-                                                        <option value="3">Unemployed</option>
-							<option value="4">Disabled</option>
-                                                        <option value="5">Unemployed (other)</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">Urban</span>
-					<div>
-						<select class="selection-2" id="urban" name="urban">
-							<option value="1">Urban</option>
-							<option value="2">Rural</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">SSN</span>
-					<div>
-						<select class="selection-2" id="ssnyn" name="ssnyn">
-							<option value="0">Not present</option>
-							<option value="1">Present</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">Veteran Status</span>
-					<div>
-						<select class="selection-2" id="vt" name="vt">
-							<option value="0">Not a veteran</option>
-							<option value="1">Veteran</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">Health Insurance Status</span>
-					<div>
-						<select class="selection-2" id="histatus" name="histatus">
-							<option value="0">Not covered</option>
-							<option value="1">Covered</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
-				</div>
-                                <div class="wrap-input100 input100-select">
-					<span class="label-input100">Health Insurance Type</span>
-					<div>
-						<select class="selection-2" id="hitype" name="hitype">
-							<option value="0">Not covered</option>
-							<option value="1">Medicare</option>
-                                                        <option value="2">Medicaid</option>
-							<option value="3">Government insurance (other)</option>
-                                                        <option value="4">Employer insurance</option>
-							<option value="5">Private insurance</option>
+						<select class="selection-2" id="sector" name="Sector">
+							<option value="Agriculture">Agriculture</option>
+	<option value="Arts">Arts</option>
+	<option value="Clothing">Clothing</option>
+	<option value="Construction">Construction</option>
+	<option value="Education">Education</option>
+	<option value="Entertainment">Entertainment</option>
+	<option value="Food">Food</option>
+	<option value="Health">Health</option>
+	<option value="Housing">Housing</option>
+	<option value="Manufacturing">Manufacturing</option>
+	<option value="Personal Use">Personal Use</option>
+	<option selected="selected" value="Retail">Retail</option>
+	<option value="Services">Services</option>
+	<option value="Transportation">Transportation</option>
+	<option value="Wholesale">Wholesale</option>
 						</select>
 					</div>
 					<span class="focus-input100"></span>

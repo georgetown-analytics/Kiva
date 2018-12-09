@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*/__pycache__/*
+*.py[cod]
+*$py.class
+dbconfig.py
+.ipynb*
+.DS_Store
+config/dbconfig.py
+Model/dbconfig.py
+*.pyc

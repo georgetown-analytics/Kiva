@@ -4,7 +4,7 @@ import numpy as np
 import json
 
 # load pickle below
-lr = joblib.load('kiva-predictor.pkl')
+#lr = joblib.load('kiva-predictor.pkl')
 
 app = Flask(__name__)
 

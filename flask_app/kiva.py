@@ -41,8 +41,6 @@ def process_input(data):
     else:
         enc_input[0] = 0
     enc_input[1] = len(data['description'])
-    print('hello')
-    print(data['loanamount'])
     enc_input[2] = float(data['loanamount'])
     enc_input[3] = len(data['intendeduse'])
     if data['usd'] == 'Yes' :
@@ -154,7 +152,9 @@ def get_delay():
     s = s.reshape(1, -1)
     pred = lr.predict_proba(s)
     pred = np.around((pred[0,1]), 2)
-    return "There is a % chance you will raise the money in 5 days" + cstr(pred);
+    print (pred)
+    string = "There is a (%f) percent chance you will raise the money in 5 days" % pred;
+    return string;
     # return render_template('result.html',prediction=price_pred)
 
 if __name__ == "__main__":

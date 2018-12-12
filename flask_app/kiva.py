@@ -4,7 +4,7 @@ import numpy as np
 import json
 
 # load pickle below
-#lr = joblib.load('kiva-predictor.pkl')
+lr = joblib.load('kiva_predictor.pkl')
 
 app = Flask(__name__)
 
@@ -12,107 +12,149 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/api', methods=['POST'])
-def make_prediction():
-    data = request.get_json(force=True)
-    #convert our json to a numpy array
-    one_hot_data = input_to_one_hot(data)
-    predict_request = gbr.predict([one_hot_data])
-    output = [predict_request[0]]
-    print(data)
-    return jsonify(results=output)
+"""
+'language_english', 'description_length', 'loan_amount',
+       'loan_use_length', 'currency_usd', 'tags_exist',
+       'num_borrowers_female_pct', 'sector_name_Agriculture',
+       'sector_name_Arts', 'sector_name_Clothing', 'sector_name_Construction',
+       'sector_name_Education', 'sector_name_Entertainment',
+       'sector_name_Health', 'sector_name_Housing',
+       'sector_name_Manufacturing', 'sector_name_Personal Use',
+       'sector_name_Retail', 'sector_name_Services',
+       'sector_name_Transportation', 'sector_name_Wholesale',
+       'distribution_model_direct', 'distribution_model_field_partner',
+       'repayment_interval_bullet', 'repayment_interval_irregular',
+       'repayment_interval_weekly'
 
-def input_to_one_hot(data):
+repayment_interval_monthly
+sector_name_Food
+distribution_model_field_partner
+"""
+
+
+def process_input(data):
     # initialize the target vector with zero values
-    enc_input = np.zeros(40)
+    enc_input = np.zeros(26)
     # set the numerical input as they are
-    enc_input[0] = data['English language']
-    enc_input[1] = data['Description length']
-    enc_input[2] = data['Loan amount']
-    enc_input[3] = data['Loan image provided']
-    enc_input[4] = data['Loan video provided']
-    enc_input[5] = data['Loan use length']
-    enc_input[6] = data['Currency exchange coverage rate']
-    enc_input[7] = data['USD']
-    enc_input[8] = data['Sector']
-    enc_input[9] = data['Distribution model field partner']
-    enc_input[10] = data['Repayment interval']
+    if data['englishyn'] == 'Yes' :
+        enc_input[0] = 1
+    else:
+        enc_input[0] = 0
+    enc_input[1] = len(data['description'])
+    print('hello')
+    print(data['loanamount'])
+    enc_input[2] = float(data['loanamount'])
+    enc_input[3] = len(data['intendeduse'])
+    if data['usd'] == 'Yes' :
+        enc_input[4] = 1
+    else:
+        enc_input[4] = 0
+    if len(data['hashtags']) > 0 :
+        enc_input[5] = 1
+    else:
+        enc_input[5] = 0
+    enc_input[6] = float(data['females']) / (float(data['females']) + float(data['males']))
+    if data['sector'] == 'Agriculture':
+        enc_input[7] = 1
+    else:
+        enc_input[7] = 0
+    if data['sector'] == 'Arts':
+        enc_input[8] = 1
+    else:
+        enc_input[8] = 0
+    if data['sector'] == 'Clothing':
+        enc_input[9] = 1
+    else:
+        enc_input[9] = 0
+    if data['sector'] == 'Construction':
+        enc_input[10] = 1
+    else:
+        enc_input[10] = 0
+    if data['sector'] == 'Education':
+        enc_input[11] = 1
+    else:
+        enc_input[11] = 0
+    if data['sector'] == 'Entertainment':
+        enc_input[12] = 1
+    else:
+        enc_input[12] = 0
+    if data['sector'] == 'Health':
+        enc_input[13] = 1
+    else:
+        enc_input[13] = 0
+    if data['sector'] == 'Housing':
+        enc_input[14] = 1
+    else:
+        enc_input[14] = 0
+    if data['sector'] == 'Manufacturing':
+        enc_input[15] = 1
+    else:
+        enc_input[15] = 0
+    if data['sector'] == 'Personal Use':
+        enc_input[16] = 1
+    else:
+        enc_input[16] = 0
+    if data['sector'] == 'Retail':
+        enc_input[17] = 1
+    else:
+        enc_input[17] = 0
+    if data['sector'] == 'Services':
+        enc_input[18] = 1
+    else:
+        enc_input[18] = 0
+    if data['sector'] == 'Transportation':
+        enc_input[19] = 1
+    else:
+        enc_input[19] = 0
+    if data['sector'] == 'Wholesale':
+        enc_input[20] = 1
+    else:
+        enc_input[20] = 0
+    if data['distribution_model'] == 'Direct':
+        enc_input[21] = 1
+    else:
+        enc_input[21] = 0
+    if data['distribution_model'] == 'Field Partner':
+        enc_input[22] = 1
+    else:
+        enc_input[22] = 0
+    if data['repayment_interval'] == 'One Time Payement':
+        enc_input[23] = 1
+    else:
+        enc_input[23] = 0
+    if data['repayment_interval'] == 'Whenever you can':
+        enc_input[24] = 1
+    else:
+        enc_input[24] = 0
+    if data['repayment_interval'] == 'Weekly':
+        enc_input[25] = 1
+    else:
+        enc_input[25] = 0
 
-    cols = ['age', 'sex', 'urban', 'ssnyn', 'vt', 'histatus', 'ms_1', 'ms_2', 'ms_3', 'ms_4', 'ms_5', 'educ_1', 'educ_2', 'educ_5', 'educ_8', 'educ_9', 'educ_12', 'educ_13', 'pob_0', 'pob_101', 'pob_102', 'pob_103', 'pob_104', 'pob_105', 'pob_106', 'pob_107', 'pob_108','pob_110', 'pob_900', 'esr_1', 'esr_2', 'esr_3', 'esr_4', 'esr_5', 'hitype_0', 'hitype_1', 'hitype_2', 'hitype_3', 'hitype_4', 'hitype_5']
-    ##################### MS #########################
-    # get the array of ms categories
-    ms = ['1', '2', '3', '4', '5']
-    # redefine the the user input to match the column name
-    redefinded_user_input = 'ms_'+data['ms']
-    # search for the index in columns name list
-    ms_column_index = cols.index(redefinded_user_input)
-    #print(mark_column_index)
-    # fullfill the found index with 1
-    enc_input[ms_column_index] = 1
-    ##################### Education Type ####################
-    # get the array of education type
-    educ_type = ['1', '2', '5', '8', '9', '12', '13']
-    # redefine the the user inout to match the column name
-    redefinded_user_input = 'educ_'+data['educ']
-    # search for the index in columns name list
-    educ_column_index = cols.index(redefinded_user_input)
-    # fullfill the found index with 1
-    enc_input[educ_column_index] = 1
-    ##################### POB ####################
-    # get the array of POB type
-    pob_type = ['0', '101', '102', '103', '104', '105', '106', '107', '108', '110','900']
-    # redefine the the user inout to match the column name
-    redefinded_user_input = 'pob_'+data['pob']
-    # search for the index in columns name list
-    pob_column_index = cols.index(redefinded_user_input)
-    # fullfill the found index with 1
-    enc_input[pob_column_index] = 1
-    ##################### Employment ####################
-    # get the array of POB type
-    esr_type = ['1', '2', '3', '4', '5']
-    # redefine the the user inout to match the column name
-    redefinded_user_input = 'esr_'+data['esr']
-    # search for the index in columns name list
-    esr_column_index = cols.index(redefinded_user_input)
-    # fullfill the found index with 1
-    enc_input[esr_column_index] = 1
-    ##################### Health Insurance Type ####################
-    # get the array of HI Type
-    hi_type = ['1', '2', '3', '4', '5']
-    # redefine the the user inout to match the column name
-    redefinded_user_input = 'hitype_'+data['hitype']
-    # search for the index in columns name list
-    hitype_column_index = cols.index(redefinded_user_input)
-    # fullfill the found index with 1
-    enc_input[hitype_column_index] = 1
     return enc_input
 
 @app.route('/api',methods=['POST'])
 def get_delay():
     result = request.form
-    age = result['age']
-    sex = result['sex']
-    ms = result['ms']
-    educ = result['educ']
-    pob = result['pob']
-    esr = result['esr']
-    urban = result['urban']
-    ssnyn = result['ssnyn']
-    vt = result['vt']
-    histatus = result['histatus']
-    hitype = result['hitype']
+    loanamount = result['loanamount']
+    description = result['description']
+    intendeduse = result['intendeduse']
+    hashtags = result['hashtags']
+    females = result['females']
+    males = result['males']
+    usd = result['usd']
+    englishyn = result['englishyn']
+    sector = result['sector']
+    repayment_interval = result['repayment_interval']
+    distribution_model = result['distribution_model']
 
-    user_input = {'age':age, 'sex':sex, 'ms':ms, 'educ':educ, 'pob':pob, 'esr':esr, 'urban':urban, 'ssnyn':ssnyn, 'vt':vt, 'histatus':histatus, 'hitype':hitype}
 
-    print(user_input)
-
-    a = input_to_one_hot(user_input)
-    a = a.reshape(1, -1)
-
-    mort_pred = lr.predict_proba(a)
-    mort_pred = np.around((mort_pred[0,1]), 2)
-
-    return json.dumps({'mort_pred':mort_pred});
+    data = {'loanamount':loanamount,'description':description,'intendeduse':intendeduse,'hashtags':hashtags,'females':females,	'males':males,'usd':usd,'englishyn':englishyn,'sector':sector,'repayment_interval':repayment_interval,'distribution_model':distribution_model}
+    s = process_input(data)
+    s = s.reshape(1, -1)
+    pred = lr.predict_proba(s)
+    pred = np.around((pred[0,1]), 2)
+    return "There is a % chance you will raise the money in 5 days" + cstr(pred);
     # return render_template('result.html',prediction=price_pred)
 
 if __name__ == "__main__":

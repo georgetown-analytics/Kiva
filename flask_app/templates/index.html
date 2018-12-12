@@ -1,245 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Kiva - Fast Money Helper</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="static/css/main.css">
+<head>
+    <title>Kiva - Fast Money Helper</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css?v={random number/string}" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/main.css">
 </head>
+
 <body>
 
-  <!-- Optional JavaScript (from Bootstrap)-->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript (from Bootstrap)-->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-  <!-- Main content -->
-  <div class="container-contact100">
-		<div class="wrap-contact100">
-			<form id="form_pred" class="contact100-form validate-form" method="post" action="/api">
-				<span class="contact100-form-title">
-					Kiva - Fast Money Helper
+    <!-- Main content -->
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form id="form_pred" class="contact100-form validate-form" method="post" onsubmit="checkValidity()" action="/api">
+							<div style="text-align: center;"><img src="static/Kiva-loans.jpg" width="">
+							</div>
+								<span class="contact100-form-title">
+					Will you get funded in five days?
 				</span>
-				<div class="wrap-input100 validate-input" data-validate="Gender is required">
-					<span class="label-input100">How many female borrowers are in your group?</span>
-					<div>
-						<select class="selection-2" id="females" name="females">
-							<option value="0">0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-							<option value="13">13</option>
-							<option value="14">14</option>
-							<option value="15">15</option>
-							<option value="16">16</option>
-							<option value="17">17</option>
-							<option value="18">18</option>
-							<option value="19">19</option>
-							<option value="20">20</option>
-							<option value="21">21</option>
-							<option value="22">22</option>
-							<option value="23">23</option>
-							<option value="24">24</option>
-							<option value="25">25</option>
-							<option value="26">26</option>
-							<option value="27">27</option>
-							<option value="28">28</option>
-							<option value="29">29</option>
-							<option value="30">30</option>
-							<option value="31">31</option>
-							<option value="32">32</option>
-							<option value="33">33</option>
-							<option value="34">34</option>
-							<option value="35">35</option>
-							<option value="36">36</option>
-							<option value="37">37</option>
-							<option value="38">38</option>
-							<option value="39">39</option>
-							<option value="40">40</option>
-						</select>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate="Gender is required">
-						<span class="label-input100">How many male borrowers are in your group?</span>
-						<div>
-							<select class="selection-2" id="males" name="males">
-								<option value="0">0</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-								<option value="25">25</option>
-								<option value="26">26</option>
-								<option value="27">27</option>
-								<option value="28">28</option>
-								<option value="29">29</option>
-								<option value="30">30</option>
-								<option value="31">31</option>
-								<option value="32">32</option>
-								<option value="33">33</option>
-								<option value="34">34</option>
-								<option value="35">35</option>
-								<option value="36">36</option>
-								<option value="37">37</option>
-								<option value="38">38</option>
-								<option value="39">39</option>
-								<option value="40">40</option>
-							</select>
-						</div>
-					<span class="focus-input100"></span>
-				</div>
-				<div class="wrap-input100 input100-select">
-					<span class="label-input100">Will you be using USD as your currency?</span>
-					<div>
-						<select class="selection-2" id="usd" name="usd">
-							<option value="1">Yes</option>
-							<option value="2">No</option>
-						</select>
-					</div>
-				</div>
-					<span class="focus-input100"></span>
-					<div class="wrap-input100 input100-select">
-						<span class="label-input100">Will you be using english for your post?</span>
-						<div>
-							<select class="selection-2" id="englishyn" name="englishyn">
-								<option value="1">Yes</option>
-								<option value="2">No</option>
-							</select>
-						</div>
+				<div class="wrap-input100 validate-input" data-validate="Loan Amount">
+						<span class="label-input100">Loan Amount (USD)</span>
+						<input class="input100" type="number" min="0" id="loanamount" name="loanamount" placeholder="Enter the Loan Amount" required>
 						<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 validate-input" data-validate="Description is required">
-					<span class="label-input100">Description (english)</span>
-					<input class="input100" type="text" id="age" name="description" placeholder="Enter your description in english">
-					<span class="focus-input100"></span>
+						<span class="label-input100">Description (english)</span>
+						<input class="input100" type="text" id="description" name="description" placeholder="Enter your description in english">
+						<span class="focus-input100"></span>
 				</div>
-		        <div class="wrap-input100 input100-select">
-					<span class="label-input100">What Sector will you choose? (Default is retail)</span>
-					<div>
-						<select class="selection-2" id="sector" name="Sector">
-							<option value="Agriculture">Agriculture</option>
-	<option value="Arts">Arts</option>
-	<option value="Clothing">Clothing</option>
-	<option value="Construction">Construction</option>
-	<option value="Education">Education</option>
-	<option value="Entertainment">Entertainment</option>
-	<option value="Food">Food</option>
-	<option value="Health">Health</option>
-	<option value="Housing">Housing</option>
-	<option value="Manufacturing">Manufacturing</option>
-	<option value="Personal Use">Personal Use</option>
-	<option selected="selected" value="Retail">Retail</option>
-	<option value="Services">Services</option>
-	<option value="Transportation">Transportation</option>
-	<option value="Wholesale">Wholesale</option>
-						</select>
-					</div>
-					<span class="focus-input100"></span>
+				<div class="wrap-input100 validate-input" data-validate="Loan Use is required">
+						<span class="label-input100">What is your intended use for this loan?)</span>
+						<input class="input100" type="text" id="intendeduse" name="intendeduse" placeholder="Enter your intended use in english">
+						<span class="focus-input100"></span>
 				</div>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button id="predict" class="contact100-form-btn">
-							<span>
+				<div class="wrap-input100 validate-input">
+						<span class="label-input100">Will you use any hash tags for this loan description?)</span>
+						<input class="input100" type="text" id="hashtags" name="hashtags" placeholder="Enter your #hashtags">
+						<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input" data-validate="Number of Females is required">
+                    <span class="label-input100">How many of your group are women?</span>
+                    <input class="input100" type="number" min="0" id="females" name="females" placeholder="Enter # of females in group" required>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Number of Males is required">
+                    <span class="label-input100">How many of your group are women?</span>
+                    <input class="input100" type="number" min="0" id="males" name="males" placeholder="Enter # of males in group" required>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">Will you be using USD as your currency?</span>
+                    <div>
+                        <select class="selection-2" id="usd" name="usd">
+                            <option value="1">Yes</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                </div>
+                <span class="focus-input100"></span>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">Will you be using english for your post?</span>
+                    <div>
+                        <select class="selection-2" id="englishyn" name="englishyn">
+                            <option value="1">Yes</option>
+                            <option value="2">No</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">What Sector will you choose? (Default is retail)</span>
+                    <div>
+                        <select class="selection-2" id="sector" name="sector">
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Food">Food</option>
+                            <option value="Health">Health</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Personal Use">Personal Use</option>
+                            <option selected="selected" value="Retail">Retail</option>
+                            <option value="Services">Services</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Wholesale">Wholesale</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">When do you intend on replaying this loan? (default is monthly)</span>
+                    <div>
+                        <select class="selection-2" id="repayment_interval" name="repayment_interval">
+                            <option value="Monthly">Monthly</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="One Time Payement">One Time Payement</option>
+                            <option value="Whenever you can">Whenever you can</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 input100-select">
+                    <span class="label-input100">What Distribution Model will you choose? (Default is Direct)</span>
+                    <div>
+                        <select class="selection-2" id="distribution_model" name="distribution_model">
+                            <option selected="selected" value="Direct">Direct</option>
+                            <option value="Field Partner">Field Partner</option>
+                        </select>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="container-contact100-form-btn">
+                    <div class="wrap-contact100-form-btn">
+                        <div class="contact100-form-bgbtn"></div>
+                        <button id="predict" class="contact100-form-btn">
+                            <span>
 								What is the probability?
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 							</span>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <div id="dropDownSelect1"></div>
 
+    <!--===============================================================================================-->
 
-	<div id="dropDownSelect1"></div>
+    <!--===============================================================================================-->
 
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/animsition/js/animsition.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
-	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/daterangepicker/moment.min.js') }}"></script>
-	<script src="{{ url_for('static',filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='vendor/countdowntime/countdowntime.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
-	<!-- include sweetAlert plugin -->
-	<script src="{{ url_for('static',filename='js/sweetalert2.all.js') }}"></script>
-	<script type="text/javascript">
-		$(function () {
-	        $("button#predict").click(function(e){
-	        	e.preventDefault();
-	        	/*Get for variables*/
-	        	var age = $("#age").val(), sex = $("#sex").val(), ms = $("#ms").val();
-	        	var educ = $("#educ").val(), pob = $("#pob").val(), esr = $("#esr").val();
-                        var urban = $("#urban").val(), ssnyn = $("#ssnyn").val(), vt = $("#vt").val();
-                        var histatus = $("#histatus").val(), hitype = $("#hitype").val();
-	        	/*create the JSON object*/
-	        	var data = {"age":age, "sex":sex, "ms":ms, "educ":educ, "pob":pob, "esr":esr, "urban":urban, "ssnyn":ssnyn, "vt":vt, "histatus":histatus, "hitype":hitype}
-	        	/*send the ajax request*/
-	        	$.ajax({
-	        		method : "POST",
-	        		url : window.location.href + 'api',
-	        		data : $('form').serialize(),
-	        		success : function(result){
-	        			var json_result = JSON.parse(result);
-	        			var mort_pred = json_result['mort_pred'];
-	        			swal('Estimated 11-year mortality probability is '+mort_pred+'', '','success')
-	        		},
-	        		error : function(){
-	        			console.log("error")
-	        		}
-	        	})
-	        })
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+    <!-- include sweetAlert plugin -->
+    <script src="{{ url_for('static',filename='js/sweetalert2.all.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("button:predict").click(function(e) {
+							var f = document.getElementsByTagName('form')[0];
+							  if(f.checkValidity()) {
+							    f.submit();
+							  } else {
+							    alert(document.getElementById('example').validationMessage);
+							  }
+							var loanamount = $("#loanamount").val()
+							,description = $("#description").val()
+							,intendeduse = $("#intendeduse").val()
+							,hashtags = $("#hashtags").val()
+							,females = $("#females").val()
+							,males = $("#males").val()
+							,usd = $("#usd").val()
+							,englishyn = $("#englishyn").val()
+							,sector = $("#sector").val()
+							,repayment_interval = $("#repayment_interval").val()
+							,distribution_model = $("#distribution_model").val()
 
-		});
-	</script>
+							var data = {"loanamount":loanamount,	"description":description,	"intendeduse":intendeduse,	"hashtags":hashtags,	"females":females,	"males":males,	"usd":usd,	"englishyn":englishyn,	"sector":sector,	"repayment_interval":repayment_interval,	"distribution_model":distribution_model}
+							$.ajax({
+								method: "POST",
+								url: window.location.href + 'apix',
+								data: $('form').serialize(),
+								success: function(result) {
+										var json_result = JSON.parse(result);
+										var mort_pred = json_result['mort_pred'];
+										swal('Estimated 11-year mortality probability is ' + mort_pred + '', '', 'success')
+								},
+							error: function() {
+									console.log("error")
+							}
+					})
+                /*Get for variables*/
+
+            })
+
+        });
+    </script>
 </body>
+
 </html>

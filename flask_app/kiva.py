@@ -13,7 +13,7 @@ def home():
     return render_template("index.html")
 
 """
-'language_english', 'description_length', 'loan_amount',
+Index(['language_english', 'description_length', 'loan_amount',
        'loan_use_length', 'currency_usd', 'tags_exist',
        'num_borrowers_female_pct', 'sector_name_Agriculture',
        'sector_name_Arts', 'sector_name_Clothing', 'sector_name_Construction',
@@ -22,9 +22,9 @@ def home():
        'sector_name_Manufacturing', 'sector_name_Personal Use',
        'sector_name_Retail', 'sector_name_Services',
        'sector_name_Transportation', 'sector_name_Wholesale',
-       'distribution_model_direct', 'distribution_model_field_partner',
-       'repayment_interval_bullet', 'repayment_interval_irregular',
-       'repayment_interval_weekly'
+       'distribution_model_field_partner', 'fol', 'repayment_interval_bullet',
+       'repayment_interval_irregular', 'repayment_interval_weekly'],
+      dtype='object')
 
 repayment_interval_monthly
 sector_name_Food
@@ -34,7 +34,7 @@ distribution_model_field_partner
 
 def process_input(data):
     # initialize the target vector with zero values
-    enc_input = np.zeros(26)
+    enc_input = np.zeros(25)
     # set the numerical input as they are
     if data['englishyn'] == 'Yes' :
         enc_input[0] = 1
@@ -108,26 +108,22 @@ def process_input(data):
         enc_input[20] = 1
     else:
         enc_input[20] = 0
-    if data['distribution_model'] == 'Direct':
+    if data['distribution_model'] == 'Field Partner':
         enc_input[21] = 1
     else:
         enc_input[21] = 0
-    if data['distribution_model'] == 'Field Partner':
+    if data['repayment_interval'] == 'One Time Payement':
         enc_input[22] = 1
     else:
         enc_input[22] = 0
-    if data['repayment_interval'] == 'One Time Payement':
+    if data['repayment_interval'] == 'Whenever you can':
         enc_input[23] = 1
     else:
         enc_input[23] = 0
-    if data['repayment_interval'] == 'Whenever you can':
+    if data['repayment_interval'] == 'Weekly':
         enc_input[24] = 1
     else:
         enc_input[24] = 0
-    if data['repayment_interval'] == 'Weekly':
-        enc_input[25] = 1
-    else:
-        enc_input[25] = 0
 
     return enc_input
 
@@ -151,9 +147,9 @@ def get_delay():
     s = process_input(data)
     s = s.reshape(1, -1)
     pred = lr.predict_proba(s)
-    pred = np.around((pred[0,1]), 2)
+    pred = np.around((pred[0,1]), 2) * 100
     print (pred)
-    string = "There is a (%f) percent chance you will raise the money in 5 days" % pred;
+    string = '<div style="text-align: center;"><img src="static/Kiva-loans.jpg" width=""></div><div style="font-size: 24px;text-align: center;">There is a %d%% chance you will raise the money in 5 days</div>"' % pred;
     return string;
     # return render_template('result.html',prediction=price_pred)
 

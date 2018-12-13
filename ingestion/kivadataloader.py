@@ -61,7 +61,7 @@ class KivaDataLoader:
             cleanloans['description_length'].fillna(0,inplace=True)
             cleanloans['loan_use_length'].fillna(0,inplace=True)
             cleanloans=cleanloans.drop(['posted_to_raised_days',
-'num_borrowers', 'num_borrowers_male', 'num_borrowers_female',
+'num_borrowers', 'num_borrowers_male', 'num_borrowers_female','distribution_model_direct',
 'sector_name_Food','repayment_interval_monthly'], axis=1)
             cleanloans=cleanloans.select_dtypes(exclude=['object','datetime64[ns, UTC]'])
 

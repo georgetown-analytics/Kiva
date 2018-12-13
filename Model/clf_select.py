@@ -79,6 +79,7 @@ model=LogisticRegression().fit(X_train, y_train)
 
 #Pickle
 pickle.dump(model, open('kiva_predictor.pkl', 'wb'))
+pickle.dump(model, open('../flask_app/kiva_predictor.pkl', 'wb'))
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))

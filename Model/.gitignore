@@ -8,3 +8,4 @@ dbconfig.py
 config/dbconfig.py
 Model/dbconfig.py
 Kiva/Model/dbconfig.py
+.pkl

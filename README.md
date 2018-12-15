@@ -2,10 +2,10 @@
 Cohort 13 Capstone Project for the Certificate of Data Science at Georgetown University School of Continuing Studies.
 
 ## Team members:
-Thomas O’Neil (Team Spokesperson)
-Yamil Vargas
-Nuredin Abdella
-Won Choe
+* Thomas O’Neil (Team Spokesperson)
+* Yamil Vargas
+* Nuredin Abdella
+* Won Choe
 
 ## Introduction
 This project creates a model that predicts if a Kiva loan request will be fully funded within 5 days. Our group investigated data from a microlending organization called Kiva (https://www.kiva.org). A microcredit is an extension of very small loans to impoverished borrowers who typically lack collateral, steady employment, or a verifiable credit history. Microcredit is designed to support entrepreneurship and alleviate poverty. Many borrowers are illiterate, and unable to complete paperwork required to get conventional loans (Microcredit, Wikipedia). 

@@ -4,7 +4,6 @@ import time
 from sklearn.model_selection import train_test_split
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
 from sklearn.svm import LinearSVC, SVC, NuSVC
@@ -35,20 +34,17 @@ print('Instances: ', len(X), ' Number of features: ', len(X.columns))
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2, random_state=1)
 
 classifiers = [
-    LogisticRegression()]#,
-    #KNeighborsClassifier(3),
-    #DecisionTreeClassifier(),
-    #RandomForestClassifier(n_estimators=100),
-    #ExtraTreesClassifier(),
-    #AdaBoostClassifier(),
-    #GradientBoostingClassifier(),
-    #GaussianNB(),
-    #MultinomialNB(),
-    #LinearDiscriminantAnalysis(n_components=2),
-    #QuadraticDiscriminantAnalysis(),
-    #MLPClassifier(alpha=1),
-    #LinearSVC(),
-    #SGDClassifier()]
+    LogisticRegression(),
+    KNeighborsClassifier(3),
+    DecisionTreeClassifier(),
+    RandomForestClassifier(n_estimators=100),
+    ExtraTreesClassifier(),
+    GradientBoostingClassifier(),
+    GaussianNB(),
+    LinearDiscriminantAnalysis(n_components=2),
+    QuadraticDiscriminantAnalysis(),
+    MLPClassifier(alpha=1),
+    LinearSVC()]
 
 log_cols=["Classifier", "Accuracy", "Log Loss"]
 log = pd.DataFrame(columns=log_cols)
@@ -74,12 +70,6 @@ for clf in classifiers:
     log = log.append(log_entry)
 
 print("="*30)
-
-model=LogisticRegression().fit(X_train, y_train)
-
-#Pickle
-pickle.dump(model, open('kiva_predictor.pkl', 'wb'))
-pickle.dump(model, open('../flask_app/kiva_predictor.pkl', 'wb'))
 
 endTime = time.time()
 print('Took %s seconds to calculate.' % (endTime - startTime))

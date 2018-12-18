@@ -4,7 +4,7 @@ class KivaDataLoader:
         self.connected = False
         from sqlalchemy import create_engine
         from sqlalchemy import exc
-        import dbconfig
+        from config import dbconfig
         self.engine = create_engine(dbconfig.aws_connection_string)
         try:
             self.engine.connect()
